@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StockFlow | Login</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <main class="login-page">
+
+        <!-- LEFT BRAND SECTION -->
+        <section class="brand-section">
+
+            <div class="brand-content">
+
+                <div class="logo">
+                    <div class="logo-box">S</div>
+                    <span>StockFlow</span>
+                </div>
+
+                <div class="brand-text">
+
+                    <span class="eyebrow">
+                        INVENTORY & POS MANAGEMENT
+                    </span>
+
+                    <h1>
+                        Manage your business
+                        <span>smarter.</span>
+                    </h1>
+
+                    <p>
+                        A modern platform to manage inventory,
+                        billing, customers and suppliers from
+                        one powerful workspace.
+                    </p>
+
+                </div>
+
+
+                <!-- FEATURES -->
+
+                <div class="features">
+
+                    <div class="feature">
+                        <div class="feature-icon">✓</div>
+
+                        <div>
+                            <strong>Inventory Management</strong>
+                            <p>Track products and stock levels.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="feature">
+                        <div class="feature-icon">✓</div>
+
+                        <div>
+                            <strong>Smart Billing</strong>
+                            <p>Create and manage sales quickly.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="feature">
+                        <div class="feature-icon">✓</div>
+
+                        <div>
+                            <strong>Business Management</strong>
+                            <p>Customers, suppliers and staff in one place.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="brand-footer">
+                © 2026 StockFlow. All rights reserved.
+            </div>
+
+        </section>
+
+
+        <!-- RIGHT LOGIN SECTION -->
+
+        <section class="login-section">
+
+            <div class="login-card">
+
+                <div class="mobile-logo">
+
+                    <div class="logo-box">S</div>
+
+                    <span>StockFlow</span>
+
+                </div>
+
+
+                <div class="login-header">
+
+                    <h2>Welcome back</h2>
+
+                    <p>
+                        Sign in to access your StockFlow workspace.
+                    </p>
+
+                </div>
+
+
+                <!-- LOGIN FORM -->
+
+                <form id="loginForm">
+
+                    <!-- USERNAME -->
+
+                    <div class="form-group">
+
+                        <label for="username">
+                            Username
+                        </label>
+
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            placeholder="Enter your username"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="form-group">
+
+                        <div class="label-row">
+
+                            <label for="password">
+                                Password
+                            </label>
+
+                            <a href="#" class="forgot-link">
+                                Forgot password?
+                            </a>
+
+                        </div>
+
+
+                        <div class="password-container">
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                id="togglePassword"
+                                class="show-password"
+                            >
+                                Show
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- MESSAGE -->
+
+                    <div
+                        id="loginMessage"
+                        class="login-message"
+                    ></div>
+
+
+                    <!-- LOGIN BUTTON -->
+
+                    <button
+                        type="submit"
+                        id="loginButton"
+                        class="login-button"
+                    >
+                        <span>Sign in</span>
+                        <span class="arrow">→</span>
+                    </button>
+
+                </form>
+
+
+                <!-- REGISTER -->
+
+                <div class="register-area">
+
+                    <span>
+                        Don't have a staff account?
+                    </span>
+
+                    <a href="#" onclick="goToRegister(event)">
+                        Create account
+                    </a>
+
+                </div>
+
+
+                <!-- SECURITY -->
+
+                <div class="security-note">
+
+                    <span class="lock-icon">🔒</span>
+
+                    <span>
+                        Your account information is securely protected.
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="js/login.js"></script>
+
+</body>
+
+</html>

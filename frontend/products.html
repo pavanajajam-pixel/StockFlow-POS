@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StockFlow - Products</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: #f7f5fb;
+            color: #2f2b3a;
+        }
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+
+            width: 250px;
+            height: 100vh;
+
+            background: linear-gradient(
+                180deg,
+                #5e548e,
+                #6f629f
+            );
+
+            padding: 25px 18px;
+            color: white;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding: 0 12px 30px;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(255,255,255,0.15);
+            border-radius: 12px;
+
+            font-size: 22px;
+        }
+
+        .brand h2 {
+            font-size: 22px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .brand span {
+            font-size: 11px;
+            opacity: 0.7;
+        }
+
+        .nav-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.6;
+
+            padding: 10px 12px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+
+            padding: 12px 14px;
+            margin: 5px 0;
+
+            border-radius: 10px;
+
+            transition: 0.2s;
+        }
+
+        .nav-link i {
+            font-size: 18px;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(255,255,255,0.15);
+            color: white;
+        }
+
+        .logout {
+            position: absolute;
+            bottom: 25px;
+            left: 18px;
+            right: 18px;
+        }
+
+        .logout a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding: 12px 14px;
+            border-radius: 10px;
+        }
+
+        .logout a:hover {
+            background: rgba(255,255,255,0.15);
+            color: white;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .main {
+            margin-left: 250px;
+            padding: 30px 35px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 25px;
+        }
+
+        .page-title h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .page-title p {
+            color: #817b8d;
+            margin: 0;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .profile-icon {
+            width: 43px;
+            height: 43px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #e0b1cb;
+            color: #5e548e;
+
+            font-size: 19px;
+        }
+
+        .profile-info strong {
+            display: block;
+            font-size: 14px;
+        }
+
+        .profile-info span {
+            font-size: 12px;
+            color: #8c8795;
+        }
+
+        /* =========================
+           FORM CARD
+        ========================= */
+
+        .card-box {
+            background: white;
+
+            border: 1px solid #ece8f2;
+            border-radius: 16px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 5px 20px rgba(70, 55, 100, 0.05);
+
+            margin-bottom: 25px;
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: 18px;
+            font-weight: 700;
+
+            margin-bottom: 20px;
+        }
+
+        .card-title i {
+            color: #6a5a96;
+        }
+
+        .form-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #575162;
+        }
+
+        .form-control {
+            border: 1px solid #ded9e7;
+            border-radius: 9px;
+
+            padding: 10px 12px;
+
+            font-size: 14px;
+        }
+
+        .form-control:focus {
+            border-color: #9f86c0;
+
+            box-shadow:
+                0 0 0 3px rgba(159,134,192,0.15);
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .btn-primary-custom {
+            background: #5e548e;
+            color: white;
+
+            border: none;
+            border-radius: 9px;
+
+            padding: 10px 20px;
+
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .btn-primary-custom:hover {
+            background: #4d4578;
+            color: white;
+        }
+
+        .btn-secondary-custom {
+            background: #be95c4;
+            color: white;
+
+            border: none;
+            border-radius: 9px;
+
+            padding: 10px 20px;
+
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .btn-secondary-custom:hover {
+            background: #a87bae;
+            color: white;
+        }
+
+        .btn-danger-custom {
+            background: #c44536;
+            color: white;
+
+            border: none;
+            border-radius: 9px;
+
+            padding: 10px 20px;
+
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .btn-danger-custom:hover {
+            background: #a9372c;
+            color: white;
+        }
+
+        /* =========================
+           SEARCH
+        ========================= */
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 13px;
+            top: 12px;
+
+            color: #8c8795;
+        }
+
+        .search-box input {
+            padding-left: 38px;
+        }
+
+        /* =========================
+           TABLE
+        ========================= */
+
+        .table-card {
+            background: white;
+
+            border: 1px solid #ece8f2;
+            border-radius: 16px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 5px 20px rgba(70, 55, 100, 0.05);
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 20px;
+        }
+
+        .table-header h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .table {
+            margin: 0;
+        }
+
+        .table th {
+            background: #f8f6fb;
+
+            color: #706a7c;
+
+            font-size: 12px;
+            font-weight: 600;
+
+            padding: 13px 10px;
+
+            border-bottom: 1px solid #e9e5ef;
+        }
+
+        .table td {
+            font-size: 13px;
+
+            padding: 14px 10px;
+
+            vertical-align: middle;
+        }
+
+        .table tbody tr:hover {
+            background: #faf9fc;
+        }
+
+        .product-id {
+            font-weight: 600;
+            color: #6a5a96;
+        }
+
+        .price {
+            font-weight: 600;
+        }
+
+        .action-btn {
+            width: 34px;
+            height: 34px;
+
+            border: none;
+            border-radius: 8px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-right: 5px;
+        }
+
+        .edit-btn {
+            background: #eee9f6;
+            color: #66568f;
+        }
+
+        .delete-btn {
+            background: #fbe9e7;
+            color: #c44536;
+        }
+
+        .action-btn:hover {
+            opacity: 0.8;
+        }
+
+        /* =========================
+           EMPTY STATE
+        ========================= */
+
+        .empty-state {
+            text-align: center;
+            padding: 45px 20px;
+            color: #8c8795;
+        }
+
+        .empty-state i {
+            font-size: 42px;
+            color: #c5bad6;
+            margin-bottom: 12px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .sidebar {
+                width: 75px;
+                padding: 20px 10px;
+            }
+
+            .brand h2,
+            .brand span,
+            .nav-link span,
+            .nav-title,
+            .logout span {
+                display: none;
+            }
+
+            .brand {
+                justify-content: center;
+            }
+
+            .nav-link {
+                justify-content: center;
+            }
+
+            .logout {
+                left: 10px;
+                right: 10px;
+            }
+
+            .main {
+                margin-left: 75px;
+                padding: 25px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+<!-- ==========================================
+     SIDEBAR
+========================================== -->
+
+<aside class="sidebar">
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            <i class="bi bi-box-seam"></i>
+        </div>
+
+        <div>
+            <h2>StockFlow</h2>
+            <span>Inventory & POS</span>
+        </div>
+
+    </div>
+
+
+    <div class="nav-title">
+        Main Menu
+    </div>
+
+
+    <a href="dashboard.html" class="nav-link">
+        <i class="bi bi-grid-1x2-fill"></i>
+        <span>Dashboard</span>
+    </a>
+
+
+    <a href="products.html" class="nav-link active">
+        <i class="bi bi-box-seam"></i>
+        <span>Products</span>
+    </a>
+
+
+    <a href="customers.html" class="nav-link">
+        <i class="bi bi-people"></i>
+        <span>Customers</span>
+    </a>
+
+
+    <a href="billing.html" class="nav-link">
+        <i class="bi bi-receipt"></i>
+        <span>Billing</span>
+    </a>
+
+
+    <a href="suppliers.html" class="nav-link">
+        <i class="bi bi-truck"></i>
+        <span>Suppliers</span>
+    </a>
+
+
+    <div class="nav-title">
+        Management
+    </div>
+
+
+    <a href="#" class="nav-link">
+        <i class="bi bi-bar-chart"></i>
+        <span>Reports</span>
+    </a>
+
+
+    <a href="#" class="nav-link">
+        <i class="bi bi-gear"></i>
+        <span>Settings</span>
+    </a>
+
+
+    <div class="logout">
+
+        <a href="login.html">
+            <i class="bi bi-box-arrow-left"></i>
+            <span>Logout</span>
+        </a>
+
+    </div>
+
+</aside>
+
+
+<!-- ==========================================
+     MAIN CONTENT
+========================================== -->
+
+<main class="main">
+
+
+    <!-- TOP BAR -->
+
+    <div class="topbar">
+
+        <div class="page-title">
+
+            <h1>Products</h1>
+
+            <p>
+                Manage your inventory and product information.
+            </p>
+
+        </div>
+
+
+        <div class="profile">
+
+            <div class="profile-icon">
+                <i class="bi bi-person"></i>
+            </div>
+
+            <div class="profile-info">
+
+                <strong id="staffName">
+                    Admin
+                </strong>
+
+                <span id="staffRole">
+                    Administrator
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         ADD / EDIT PRODUCT
+    ========================================== -->
+
+    <div class="card-box">
+
+        <div class="card-title">
+
+            <i class="bi bi-box-seam"></i>
+
+            <span id="formTitle">
+                Add New Product
+            </span>
+
+        </div>
+
+
+        <form id="productForm">
+
+            <input
+                type="hidden"
+                id="productId"
+            >
+
+
+            <div class="row g-3">
+
+
+                <!-- Description -->
+
+                <div class="col-lg-3 col-md-6">
+
+                    <label
+                        for="description"
+                        class="form-label"
+                    >
+                        Product Description
+                    </label>
+
+                    <input
+                        type="text"
+                        id="description"
+                        class="form-control"
+                        placeholder="Enter product name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Quantity -->
+
+                <div class="col-lg-2 col-md-6">
+
+                    <label
+                        for="quantity"
+                        class="form-label"
+                    >
+                        Quantity
+                    </label>
+
+                    <input
+                        type="number"
+                        id="quantity"
+                        class="form-control"
+                        placeholder="0"
+                        min="0"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Price -->
+
+                <div class="col-lg-2 col-md-6">
+
+                    <label
+                        for="price"
+                        class="form-label"
+                    >
+                        Price (₹)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="price"
+                        class="form-control"
+                        placeholder="0.00"
+                        min="0"
+                        step="0.01"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Weight -->
+
+                <div class="col-lg-2 col-md-6">
+
+                    <label
+                        for="weight"
+                        class="form-label"
+                    >
+                        Weight
+                    </label>
+
+                    <input
+                        type="number"
+                        id="weight"
+                        class="form-control"
+                        placeholder="0.00"
+                        min="0"
+                        step="0.01"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Buttons -->
+
+                <div class="col-lg-3 col-md-12 d-flex align-items-end gap-2">
+
+                    <button
+                        type="submit"
+                        class="btn-primary-custom"
+                    >
+
+                        <i class="bi bi-plus-lg me-1"></i>
+
+                        <span id="submitText">
+                            Add Product
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        id="clearBtn"
+                        class="btn-secondary-custom"
+                    >
+
+                        <i class="bi bi-x-lg me-1"></i>
+
+                        Clear
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- ==========================================
+         PRODUCT TABLE
+    ========================================== -->
+
+    <div class="table-card">
+
+
+        <div class="table-header">
+
+            <h4>
+                Product Inventory
+            </h4>
+
+
+            <div
+                class="search-box"
+                style="width: 280px;"
+            >
+
+                <i class="bi bi-search"></i>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    class="form-control"
+                    placeholder="Search products..."
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="table-responsive">
+
+            <table class="table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            ID
+                        </th>
+
+                        <th>
+                            Description
+                        </th>
+
+                        <th>
+                            Quantity
+                        </th>
+
+                        <th>
+                            Price
+                        </th>
+
+                        <th>
+                            Weight
+                        </th>
+
+                        <th>
+                            Actions
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="productTableBody">
+
+                    <!-- Products will be inserted here -->
+
+                </tbody>
+
+            </table>
+
+
+            <!-- Empty state -->
+
+            <div
+                id="emptyState"
+                class="empty-state"
+            >
+
+                <i class="bi bi-box-seam"></i>
+
+                <h6>
+                    No Products Found
+                </h6>
+
+                <p>
+                    Add your first product using the form above.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</main>
+
+
+<!-- ==========================================
+     JAVASCRIPT
+========================================== -->
+<script>
+
+    // =========================================================
+    // STOCKFLOW PRODUCTS
+    // PostgreSQL Backend Connection
+    // =========================================================
+
+    const API_URL = "http://127.0.0.1:5000/api/products";
+
+    let products = [];
+    let editingId = null;
+
+
+    // =========================================================
+    // ELEMENTS
+    // =========================================================
+
+    const productForm =
+        document.getElementById("productForm");
+
+    const description =
+        document.getElementById("description");
+
+    const quantity =
+        document.getElementById("quantity");
+
+    const price =
+        document.getElementById("price");
+
+    const weight =
+        document.getElementById("weight");
+
+    const productId =
+        document.getElementById("productId");
+
+    const tableBody =
+        document.getElementById("productTableBody");
+
+    const emptyState =
+        document.getElementById("emptyState");
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+    const clearBtn =
+        document.getElementById("clearBtn");
+
+    const formTitle =
+        document.getElementById("formTitle");
+
+    const submitText =
+        document.getElementById("submitText");
+
+
+    // =========================================================
+    // LOAD PRODUCTS FROM POSTGRESQL
+    // =========================================================
+
+    async function loadProducts() {
+
+        try {
+
+            const response =
+                await fetch(API_URL);
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok || !data.success) {
+
+                throw new Error(
+                    data.message || "Failed to load products."
+                );
+
+            }
+
+
+            products = data.products || [];
+
+            displayProducts(searchInput.value);
+
+
+        } catch (error) {
+
+            console.error(
+                "Load Products Error:",
+                error
+            );
+
+            tableBody.innerHTML = "";
+
+            emptyState.style.display = "block";
+
+            emptyState.innerHTML = `
+                <i class="bi bi-exclamation-circle"></i>
+
+                <h6>
+                    Unable to load products
+                </h6>
+
+                <p>
+                    Make sure the StockFlow Flask server is running.
+                </p>
+            `;
+
+        }
+
+    }
+
+
+    // =========================================================
+    // DISPLAY PRODUCTS
+    // =========================================================
+
+    function displayProducts(search = "") {
+
+        tableBody.innerHTML = "";
+
+
+        const searchText =
+            search.toLowerCase().trim();
+
+
+        const filteredProducts =
+            products.filter(product =>
+
+                String(product.id)
+                    .includes(searchText)
+
+                ||
+
+                product.description
+                    .toLowerCase()
+                    .includes(searchText)
+
+            );
+
+
+        // -----------------------------------------------------
+        // EMPTY STATE
+        // -----------------------------------------------------
+
+        if (filteredProducts.length === 0) {
+
+            emptyState.style.display = "block";
+
+            emptyState.innerHTML = `
+                <i class="bi bi-box-seam"></i>
+
+                <h6>
+                    No Products Found
+                </h6>
+
+                <p>
+                    ${
+                        searchText
+                        ? "No products match your search."
+                        : "Add your first product using the form above."
+                    }
+                </p>
+            `;
+
+            return;
+
+        }
+
+
+        emptyState.style.display = "none";
+
+
+        // -----------------------------------------------------
+        // DISPLAY ROWS
+        // -----------------------------------------------------
+
+        filteredProducts.forEach(product => {
+
+            const row =
+                document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td class="product-id">
+                    #${product.id}
+                </td>
+
+                <td>
+                    ${escapeHTML(product.description)}
+                </td>
+
+                <td>
+                    ${product.quantity}
+                </td>
+
+                <td class="price">
+                    ₹${Number(product.price).toFixed(2)}
+                </td>
+
+                <td>
+                    ${Number(product.weight).toFixed(2)}
+                </td>
+
+                <td>
+
+                    <button
+                        class="action-btn edit-btn"
+                        onclick="editProduct(${product.id})"
+                        title="Edit"
+                    >
+
+                        <i class="bi bi-pencil"></i>
+
+                    </button>
+
+
+                    <button
+                        class="action-btn delete-btn"
+                        onclick="deleteProduct(${product.id})"
+                        title="Delete"
+                    >
+
+                        <i class="bi bi-trash"></i>
+
+                    </button>
+
+                </td>
+
+            `;
+
+
+            tableBody.appendChild(row);
+
+        });
+
+    }
+
+
+    // =========================================================
+    // ADD / UPDATE PRODUCT
+    // =========================================================
+
+    productForm.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const productDescription =
+                description.value.trim();
+
+            const productQuantity =
+                Number(quantity.value);
+
+            const productPrice =
+                Number(price.value);
+
+            const productWeight =
+                Number(weight.value);
+
+
+            // -------------------------------------------------
+            // FRONTEND VALIDATION
+            // -------------------------------------------------
+
+            if (!productDescription) {
+
+                alert(
+                    "Please enter a product description."
+                );
+
+                return;
+
+            }
+
+
+            if (!Number.isInteger(productQuantity)
+                || productQuantity < 0) {
+
+                alert(
+                    "Please enter a valid quantity."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                !Number.isFinite(productPrice)
+                || productPrice < 0
+            ) {
+
+                alert(
+                    "Please enter a valid price."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                !Number.isFinite(productWeight)
+                || productWeight < 0
+            ) {
+
+                alert(
+                    "Please enter a valid weight."
+                );
+
+                return;
+
+            }
+
+
+            // -------------------------------------------------
+            // DISABLE SUBMIT BUTTON
+            // -------------------------------------------------
+
+            const submitButton =
+                productForm.querySelector(
+                    'button[type="submit"]'
+                );
+
+            submitButton.disabled = true;
+
+
+            try {
+
+                let response;
+
+
+                // =================================================
+                // UPDATE EXISTING PRODUCT
+                // =================================================
+
+                if (editingId !== null) {
+
+                    response =
+                        await fetch(
+                            `${API_URL}/${editingId}`,
+                            {
+                                method: "PUT",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body: JSON.stringify({
+
+                                    description:
+                                        productDescription,
+
+                                    quantity:
+                                        productQuantity,
+
+                                    price:
+                                        productPrice,
+
+                                    weight:
+                                        productWeight
+
+                                })
+
+                            }
+                        );
+
+                }
+
+
+                // =================================================
+                // ADD NEW PRODUCT
+                // =================================================
+
+                else {
+
+                    response =
+                        await fetch(
+                            API_URL,
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body: JSON.stringify({
+
+                                    description:
+                                        productDescription,
+
+                                    quantity:
+                                        productQuantity,
+
+                                    price:
+                                        productPrice,
+
+                                    weight:
+                                        productWeight
+
+                                })
+
+                            }
+                        );
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                // -------------------------------------------------
+                // BACKEND ERROR
+                // -------------------------------------------------
+
+                if (!response.ok || !data.success) {
+
+                    throw new Error(
+                        data.message ||
+                        "Operation failed."
+                    );
+
+                }
+
+
+                // -------------------------------------------------
+                // SUCCESS
+                // -------------------------------------------------
+
+                if (editingId !== null) {
+
+                    alert(
+                        "Product updated successfully."
+                    );
+
+                } else {
+
+                    alert(
+                        "Product added successfully."
+                    );
+
+                }
+
+
+                clearForm();
+
+                await loadProducts();
+
+
+            } catch (error) {
+
+                console.error(
+                    "Product Save Error:",
+                    error
+                );
+
+                alert(
+                    error.message ||
+                    "Unable to save product."
+                );
+
+            } finally {
+
+                submitButton.disabled = false;
+
+            }
+
+        }
+    );
+
+
+    // =========================================================
+    // EDIT PRODUCT
+    // =========================================================
+
+    function editProduct(id) {
+
+        const product =
+            products.find(
+                p => p.id === id
+            );
+
+
+        if (!product) {
+
+            alert(
+                "Product not found."
+            );
+
+            return;
+
+        }
+
+
+        editingId = id;
+
+
+        productId.value =
+            product.id;
+
+        description.value =
+            product.description;
+
+        quantity.value =
+            product.quantity;
+
+        price.value =
+            product.price;
+
+        weight.value =
+            product.weight;
+
+
+        formTitle.textContent =
+            "Update Product";
+
+        submitText.textContent =
+            "Update Product";
+
+
+        window.scrollTo({
+
+            top: 0,
+
+            behavior: "smooth"
+
+        });
+
+    }
+
+
+    // =========================================================
+    // DELETE PRODUCT
+    // =========================================================
+
+    async function deleteProduct(id) {
+
+        const product =
+            products.find(
+                p => p.id === id
+            );
+
+
+        if (!product) {
+
+            return;
+
+        }
+
+
+        const confirmed =
+            confirm(
+                `Are you sure you want to delete "${product.description}"?`
+            );
+
+
+        if (!confirmed) {
+
+            return;
+
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_URL}/${id}`,
+                    {
+                        method: "DELETE"
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok || !data.success) {
+
+                throw new Error(
+                    data.message ||
+                    "Failed to delete product."
+                );
+
+            }
+
+
+            alert(
+                "Product deleted successfully."
+            );
+
+
+            if (editingId === id) {
+
+                clearForm();
+
+            }
+
+
+            await loadProducts();
+
+
+        } catch (error) {
+
+            console.error(
+                "Delete Product Error:",
+                error
+            );
+
+            alert(
+                error.message ||
+                "Unable to delete product."
+            );
+
+        }
+
+    }
+
+
+    // =========================================================
+    // CLEAR FORM
+    // =========================================================
+
+    function clearForm() {
+
+        productForm.reset();
+
+        editingId = null;
+
+        productId.value = "";
+
+        formTitle.textContent =
+            "Add New Product";
+
+        submitText.textContent =
+            "Add Product";
+
+    }
+
+
+    clearBtn.addEventListener(
+        "click",
+        clearForm
+    );
+
+
+    // =========================================================
+    // SEARCH
+    // =========================================================
+
+    searchInput.addEventListener(
+        "input",
+        function() {
+
+            displayProducts(
+                this.value
+            );
+
+        }
+    );
+
+
+    // =========================================================
+    // STAFF INFORMATION
+    // =========================================================
+
+    const staffName =
+        localStorage.getItem("staffName");
+
+    const staffRole =
+        localStorage.getItem("staffRole");
+
+
+    if (staffName) {
+
+        document.getElementById(
+            "staffName"
+        ).textContent = staffName;
+
+    }
+
+
+    if (staffRole) {
+
+        document.getElementById(
+            "staffRole"
+        ).textContent = staffRole;
+
+    }
+
+
+    // =========================================================
+    // HTML SAFETY
+    // =========================================================
+
+    function escapeHTML(value) {
+
+        const div =
+            document.createElement("div");
+
+        div.textContent =
+            value;
+
+        return div.innerHTML;
+
+    }
+
+
+    // =========================================================
+    // INITIAL LOAD
+    // =========================================================
+
+    loadProducts();
+
+</script>
+
+
+    
+
+
+
+</body>
+</html>

@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StockFlow - Dashboard</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: #f7f5fb;
+            color: #2f2b3a;
+        }
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+
+            background: linear-gradient(
+                180deg,
+                #5e548e,
+                #6f629f
+            );
+
+            padding: 25px 18px;
+            color: white;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 12px 30px;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(255,255,255,0.15);
+            border-radius: 12px;
+
+            font-size: 22px;
+        }
+
+        .brand h2 {
+            font-size: 22px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .brand span {
+            font-size: 11px;
+            opacity: 0.7;
+        }
+
+        /* Navigation */
+
+        .nav-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.6;
+
+            padding: 10px 12px;
+            margin-top: 5px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+
+            padding: 12px 14px;
+            margin: 5px 0;
+
+            border-radius: 10px;
+
+            transition: 0.2s;
+        }
+
+        .nav-link i {
+            font-size: 18px;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(255,255,255,0.15);
+            color: white;
+        }
+
+        /* Logout */
+
+        .logout {
+            position: absolute;
+            bottom: 25px;
+            left: 18px;
+            right: 18px;
+        }
+
+        .logout a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding: 12px 14px;
+            border-radius: 10px;
+        }
+
+        .logout a:hover {
+            background: rgba(255,255,255,0.15);
+            color: white;
+        }
+
+        /* =========================
+           MAIN CONTENT
+        ========================= */
+
+        .main {
+            margin-left: 250px;
+            padding: 30px 35px;
+        }
+
+        /* Top Bar */
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 30px;
+        }
+
+        .welcome h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .welcome p {
+            color: #817b8d;
+            margin: 0;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .profile-icon {
+            width: 43px;
+            height: 43px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #e0b1cb;
+            color: #5e548e;
+
+            font-size: 19px;
+        }
+
+        .profile-info strong {
+            display: block;
+            font-size: 14px;
+        }
+
+        .profile-info span {
+            font-size: 12px;
+            color: #8c8795;
+        }
+
+        /* =========================
+           STAT CARDS
+        ========================= */
+
+        .stat-card {
+            background: white;
+
+            border-radius: 16px;
+            padding: 22px;
+
+            border: 1px solid #ece8f2;
+
+            box-shadow:
+                0 5px 20px rgba(70, 55, 100, 0.05);
+
+            height: 100%;
+        }
+
+        .stat-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stat-icon {
+            width: 45px;
+            height: 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background: #f0eaf7;
+            color: #6a5a96;
+
+            font-size: 20px;
+        }
+
+        .stat-card h6 {
+            color: #8b8495;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .stat-card h2 {
+            font-size: 27px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .stat-change {
+            font-size: 12px;
+            margin-top: 12px;
+            color: #6b9b7b;
+        }
+
+        /* =========================
+           QUICK ACTIONS
+        ========================= */
+
+        .section-title {
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        .quick-card {
+            background: white;
+
+            border: 1px solid #ece8f2;
+            border-radius: 15px;
+
+            padding: 20px;
+
+            text-decoration: none;
+            color: #2f2b3a;
+
+            display: block;
+
+            transition: 0.2s;
+
+            height: 100%;
+        }
+
+        .quick-card:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 10px 25px rgba(70, 55, 100, 0.08);
+
+            color: #2f2b3a;
+        }
+
+        .quick-icon {
+            width: 45px;
+            height: 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background: #f0eaf7;
+            color: #6a5a96;
+
+            font-size: 20px;
+
+            margin-bottom: 14px;
+        }
+
+        .quick-card h5 {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .quick-card p {
+            font-size: 12px;
+            color: #8a8492;
+            margin: 0;
+        }
+
+        /* =========================
+           RECENT SALES
+        ========================= */
+
+        .panel {
+            background: white;
+
+            border: 1px solid #ece8f2;
+            border-radius: 16px;
+
+            padding: 22px;
+
+            box-shadow:
+                0 5px 20px rgba(70, 55, 100, 0.04);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 15px;
+        }
+
+        .panel-header h4 {
+            font-size: 17px;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .view-all {
+            font-size: 12px;
+            color: #6a5a96;
+            text-decoration: none;
+        }
+
+        .table {
+            margin: 0;
+        }
+
+        .table th {
+            font-size: 12px;
+            color: #8b8495;
+            font-weight: 600;
+            border-bottom: 1px solid #eeeaf2;
+        }
+
+        .table td {
+            font-size: 13px;
+            padding: 14px 8px;
+            vertical-align: middle;
+        }
+
+        .status {
+            padding: 5px 10px;
+            border-radius: 20px;
+
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .status.completed {
+            background: #e8f5ed;
+            color: #43825a;
+        }
+
+        .status.pending {
+            background: #fff4df;
+            color: #a87520;
+        }
+
+        /* =========================
+           LOW STOCK
+        ========================= */
+
+        .stock-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 13px 0;
+
+            border-bottom: 1px solid #eeeaf2;
+        }
+
+        .stock-item:last-child {
+            border-bottom: none;
+        }
+
+        .stock-name {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .stock-number {
+            font-size: 11px;
+            color: #8b8495;
+        }
+
+        .stock-warning {
+            color: #c44536;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .sidebar {
+                width: 75px;
+                padding: 20px 10px;
+            }
+
+            .brand h2,
+            .brand span,
+            .nav-link span,
+            .nav-title,
+            .logout span {
+                display: none;
+            }
+
+            .brand {
+                justify-content: center;
+                padding-bottom: 25px;
+            }
+
+            .nav-link {
+                justify-content: center;
+            }
+
+            .logout {
+                left: 10px;
+                right: 10px;
+            }
+
+            .main {
+                margin-left: 75px;
+                padding: 25px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- ==========================================
+     SIDEBAR
+========================================== -->
+
+<aside class="sidebar">
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            <i class="bi bi-box-seam"></i>
+        </div>
+
+        <div>
+            <h2>StockFlow</h2>
+            <span>Inventory & POS</span>
+        </div>
+
+    </div>
+
+    <div class="nav-title">
+        Main Menu
+    </div>
+
+    <a href="dashboard.html" class="nav-link active">
+        <i class="bi bi-grid-1x2-fill"></i>
+        <span>Dashboard</span>
+    </a>
+
+    <a href="products.html" class="nav-link">
+        <i class="bi bi-box-seam"></i>
+        <span>Products</span>
+    </a>
+
+    <a href="customers.html" class="nav-link">
+        <i class="bi bi-people"></i>
+        <span>Customers</span>
+    </a>
+
+    <a href="billing.html" class="nav-link">
+        <i class="bi bi-receipt"></i>
+        <span>Billing</span>
+    </a>
+
+    <a href="suppliers.html" class="nav-link">
+        <i class="bi bi-truck"></i>
+        <span>Suppliers</span>
+    </a>
+
+    <div class="nav-title">
+        Management
+    </div>
+
+    <a href="#" class="nav-link">
+        <i class="bi bi-bar-chart"></i>
+        <span>Reports</span>
+    </a>
+
+    <a href="#" class="nav-link">
+        <i class="bi bi-gear"></i>
+        <span>Settings</span>
+    </a>
+
+    <div class="logout">
+
+        <a href="login.html">
+            <i class="bi bi-box-arrow-left"></i>
+            <span>Logout</span>
+        </a>
+
+    </div>
+
+</aside>
+
+
+<!-- ==========================================
+     MAIN CONTENT
+========================================== -->
+
+<main class="main">
+
+    <!-- TOP BAR -->
+
+    <div class="topbar">
+
+        <div class="welcome">
+
+            <h1>Dashboard</h1>
+
+            <p>
+                Welcome back! Here's what's happening with your store.
+            </p>
+
+        </div>
+
+        <div class="profile">
+
+            <div class="profile-icon">
+                <i class="bi bi-person"></i>
+            </div>
+
+            <div class="profile-info">
+
+                <strong id="staffName">
+                    Admin
+                </strong>
+
+                <span id="staffRole">
+                    Administrator
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         STATISTICS
+    ========================================== -->
+
+    <div class="row g-4 mb-4">
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+                        <h6>Total Products</h6>
+                        <h2 id="totalProducts">0</h2>
+                    </div>
+
+                    <div class="stat-icon">
+                        <i class="bi bi-box-seam"></i>
+                    </div>
+
+                </div>
+
+                <div class="stat-change">
+                    <i class="bi bi-arrow-up"></i>
+                    Inventory items
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+                        <h6>Total Customers</h6>
+                        <h2 id="totalCustomers">0</h2>
+                    </div>
+
+                    <div class="stat-icon">
+                        <i class="bi bi-people"></i>
+                    </div>
+
+                </div>
+
+                <div class="stat-change">
+                    <i class="bi bi-person-check"></i>
+                    Registered customers
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+                        <h6>Today's Sales</h6>
+                        <h2 id="todaySales">₹0</h2>
+                    </div>
+
+                    <div class="stat-icon">
+                        <i class="bi bi-currency-rupee"></i>
+                    </div>
+
+                </div>
+
+                <div class="stat-change">
+                    <i class="bi bi-graph-up"></i>
+                    Today's revenue
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+                        <h6>Low Stock</h6>
+                        <h2 id="lowStock">0</h2>
+                    </div>
+
+                    <div class="stat-icon">
+                        <i class="bi bi-exclamation-triangle"></i>
+                    </div>
+
+                </div>
+
+                <div class="stat-change">
+                    <i class="bi bi-bell"></i>
+                    Needs attention
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         QUICK ACTIONS
+    ========================================== -->
+
+    <h3 class="section-title">
+        Quick Actions
+    </h3>
+
+    <div class="row g-3 mb-4">
+
+        <div class="col-lg-3 col-md-6">
+
+            <a href="products.html" class="quick-card">
+
+                <div class="quick-icon">
+                    <i class="bi bi-plus-lg"></i>
+                </div>
+
+                <h5>Add Product</h5>
+
+                <p>
+                    Add a new product to your inventory.
+                </p>
+
+            </a>
+
+        </div>
+
+
+        <div class="col-lg-3 col-md-6">
+
+            <a href="customers.html" class="quick-card">
+
+                <div class="quick-icon">
+                    <i class="bi bi-person-plus"></i>
+                </div>
+
+                <h5>Add Customer</h5>
+
+                <p>
+                    Register a new customer.
+                </p>
+
+            </a>
+
+        </div>
+
+
+        <div class="col-lg-3 col-md-6">
+
+            <a href="billing.html" class="quick-card">
+
+                <div class="quick-icon">
+                    <i class="bi bi-cart-plus"></i>
+                </div>
+
+                <h5>Create Bill</h5>
+
+                <p>
+                    Create a new customer invoice.
+                </p>
+
+            </a>
+
+        </div>
+
+
+        <div class="col-lg-3 col-md-6">
+
+            <a href="suppliers.html" class="quick-card">
+
+                <div class="quick-icon">
+                    <i class="bi bi-truck"></i>
+                </div>
+
+                <h5>Suppliers</h5>
+
+                <p>
+                    Manage your suppliers.
+                </p>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RECENT SALES + LOW STOCK
+    ========================================== -->
+
+    <div class="row g-4">
+
+        <!-- Recent Sales -->
+
+        <div class="col-lg-8">
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <h4>
+                        Recent Sales
+                    </h4>
+
+                    <a href="billing.html" class="view-all">
+                        View All
+                    </a>
+
+                </div>
+
+                <div class="table-responsive">
+
+                    <table class="table">
+
+                        <thead>
+
+                            <tr>
+                                <th>Bill ID</th>
+                                <th>Customer</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="salesTable">
+
+                            <tr>
+                                <td colspan="5"
+                                    class="text-center text-muted py-4">
+                                    No sales recorded yet.
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Low Stock -->
+
+        <div class="col-lg-4">
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <h4>
+                        Low Stock Alert
+                    </h4>
+
+                    <i class="bi bi-bell text-danger"></i>
+
+                </div>
+
+                <div id="stockList">
+
+                    <div class="stock-item">
+
+                        <div>
+                            <div class="stock-name">
+                                No alerts
+                            </div>
+
+                            <div class="stock-number">
+                                All products are sufficiently stocked.
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- ==========================================
+     DASHBOARD SCRIPT
+========================================== -->
+
+<script>
+const DASHBOARD_API = "http://127.0.0.1:5000/api/dashboard";
+async function loadDashboard(){
+  try{
+    const r=await fetch(DASHBOARD_API); const d=await r.json();
+    if(!r.ok||!d.success) throw new Error(d.message||"Unable to load dashboard.");
+    document.getElementById("totalProducts").textContent=d.total_products;
+    document.getElementById("totalCustomers").textContent=d.total_customers;
+    document.getElementById("todaySales").textContent=`₹${Number(d.today_sales).toFixed(2)}`;
+    document.getElementById("lowStock").textContent=d.low_stock;
+    const sales=document.getElementById("salesTable");
+    sales.innerHTML=d.sales.length?d.sales.map(x=>`<tr><td>#${x.bill_id}</td><td>${escapeHTML(x.customer)}</td><td>—</td><td>₹${Number(x.amount).toFixed(2)}</td><td><span class="badge bg-success">${x.status}</span></td></tr>`).join(""): '<tr><td colspan="5" class="text-center text-muted py-4">No sales recorded yet.</td></tr>';
+    const stock=document.getElementById("stockList");
+    stock.innerHTML=d.low_stock_items.length?d.low_stock_items.map(x=>`<div class="stock-item"><div><div class="stock-name">${escapeHTML(x.description)}</div><div class="stock-number">${x.quantity} units remaining</div></div></div>`).join(""):'<div class="stock-item"><div><div class="stock-name">No alerts</div><div class="stock-number">All products are sufficiently stocked.</div></div></div>';
+  }catch(e){console.error("Dashboard Error:",e);}
+}
+function escapeHTML(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]));}
+const staff=JSON.parse(localStorage.getItem("stockflowStaff")||"null");
+if(staff){document.getElementById("staffName").textContent=staff.username||"Admin";document.getElementById("staffRole").textContent=staff.role||"Administrator";}
+loadDashboard();
+</script>
+
+
+</body>
+</html>

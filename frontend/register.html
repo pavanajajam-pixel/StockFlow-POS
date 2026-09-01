@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>StockFlow | Staff Registration</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <style>
+
+        /* =================================================
+           REGISTER PAGE
+        ================================================= */
+
+        .register-page {
+            min-height: 100vh;
+            display: flex;
+            background: #f8fafc;
+        }
+
+
+        /* =================================================
+           LEFT BRAND PANEL
+        ================================================= */
+
+        .register-brand {
+            width: 45%;
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #172554 0%,
+                    #1e3a8a 50%,
+                    #312e81 100%
+                );
+
+            color: white;
+
+            padding: 60px 7%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        .register-brand::before {
+            content: "";
+
+            position: absolute;
+
+            width: 420px;
+            height: 420px;
+
+            border-radius: 50%;
+
+            border: 1px solid
+                rgba(255,255,255,0.08);
+
+            right: -180px;
+            top: -100px;
+        }
+
+
+        .register-brand::after {
+            content: "";
+
+            position: absolute;
+
+            width: 320px;
+            height: 320px;
+
+            border-radius: 50%;
+
+            border: 1px solid
+                rgba(255,255,255,0.06);
+
+            left: -160px;
+            bottom: -100px;
+        }
+
+
+        /* =================================================
+           BRAND LOGO
+        ================================================= */
+
+        .register-logo {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            font-size: 22px;
+            font-weight: 700;
+
+            position: relative;
+            z-index: 2;
+        }
+
+
+        .register-logo-box {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 10px;
+
+            background: white;
+            color: #4f46e5;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+
+        /* =================================================
+           BRAND CONTENT
+        ================================================= */
+
+        .register-brand-content {
+            position: relative;
+            z-index: 2;
+        }
+
+
+        .register-brand-content h1 {
+            font-size: 46px;
+            line-height: 1.1;
+
+            letter-spacing: -1.5px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .register-brand-content h1 span {
+            color: #a5b4fc;
+        }
+
+
+        .register-brand-content > p {
+            max-width: 480px;
+
+            color: #cbd5e1;
+
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+
+        /* =================================================
+           BENEFITS
+        ================================================= */
+
+        .register-benefits {
+            margin-top: 40px;
+
+            display: flex;
+            flex-direction: column;
+
+            gap: 18px;
+        }
+
+
+        .register-benefit {
+            display: flex;
+            align-items: center;
+
+            gap: 13px;
+        }
+
+
+        .benefit-icon {
+            width: 32px;
+            height: 32px;
+
+            border-radius: 8px;
+
+            background:
+                rgba(255,255,255,0.12);
+
+            color: #a5b4fc;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: 700;
+        }
+
+
+        .register-benefit span {
+            font-size: 13px;
+            color: #cbd5e1;
+        }
+
+
+        /* =================================================
+           FOOTER
+        ================================================= */
+
+        .register-brand-footer {
+            position: relative;
+            z-index: 2;
+
+            color: #94a3b8;
+
+            font-size: 12px;
+        }
+
+
+        /* =================================================
+           REGISTER SECTION
+        ================================================= */
+
+        .register-section {
+            width: 55%;
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 40px;
+        }
+
+
+        .register-card {
+            width: 100%;
+            max-width: 470px;
+        }
+
+
+        /* =================================================
+           MOBILE LOGO
+        ================================================= */
+
+        .register-mobile-logo {
+            display: none;
+        }
+
+
+        /* =================================================
+           HEADER
+        ================================================= */
+
+        .register-header {
+            margin-bottom: 30px;
+        }
+
+
+        .register-header h2 {
+            font-size: 30px;
+
+            letter-spacing: -0.6px;
+
+            margin-bottom: 8px;
+
+            color: #0f172a;
+        }
+
+
+        .register-header p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+
+        /* =================================================
+           FORM
+        ================================================= */
+
+        .register-form-group {
+            margin-bottom: 18px;
+        }
+
+
+        .register-form-group label {
+            display: block;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            color: #334155;
+
+            margin-bottom: 7px;
+        }
+
+
+        .register-form-group input,
+        .register-form-group select {
+            width: 100%;
+            height: 46px;
+
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+
+            background: white;
+
+            padding: 0 13px;
+
+            font-size: 14px;
+            color: #0f172a;
+
+            outline: none;
+
+            transition: 0.2s;
+
+            box-sizing: border-box;
+        }
+
+
+        .register-form-group input:focus,
+        .register-form-group select:focus {
+            border-color: #4f46e5;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(79,70,229,0.10);
+        }
+
+
+        /* =================================================
+           PASSWORD
+        ================================================= */
+
+        .register-password {
+            position: relative;
+        }
+
+
+        .register-password input {
+            padding-right: 65px;
+        }
+
+
+        .register-password button {
+            position: absolute;
+
+            right: 12px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+            background: transparent;
+
+            color: #4f46e5;
+
+            font-size: 12px;
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+
+        /* =================================================
+           ROLE
+        ================================================= */
+
+        .role-info {
+            margin-top: 6px;
+
+            color: #94a3b8;
+
+            font-size: 11px;
+        }
+
+
+        /* =================================================
+           TERMS
+        ================================================= */
+
+        .terms {
+            display: flex;
+            align-items: flex-start;
+
+            gap: 9px;
+
+            margin: 20px 0;
+
+            color: #64748b;
+
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+
+        .terms input {
+            margin-top: 3px;
+
+            accent-color: #4f46e5;
+        }
+
+
+        /* =================================================
+           REGISTER BUTTON
+        ================================================= */
+
+        .create-account-button {
+            width: 100%;
+            height: 50px;
+
+            border: none;
+            border-radius: 8px;
+
+            background: #4f46e5;
+
+            color: white;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .create-account-button:hover {
+            background: #4338ca;
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 5px 15px
+                rgba(79,70,229,0.18);
+        }
+
+
+        .create-account-button:disabled {
+            opacity: 0.7;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+
+
+        /* =================================================
+           MESSAGE
+        ================================================= */
+
+        .register-message {
+            min-height: 20px;
+
+            margin-bottom: 8px;
+
+            font-size: 13px;
+        }
+
+
+        /* =================================================
+           LOGIN LINK
+        ================================================= */
+
+        .login-link-area {
+            text-align: center;
+
+            margin-top: 25px;
+            padding-top: 22px;
+
+            border-top: 1px solid #e2e8f0;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+
+        .login-link-area a {
+            color: #4f46e5;
+
+            font-weight: 600;
+
+            text-decoration: none;
+        }
+
+
+        .login-link-area a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =================================================
+           RESPONSIVE
+        ================================================= */
+
+        @media (max-width: 850px) {
+
+            .register-brand {
+                width: 42%;
+                padding: 45px;
+            }
+
+
+            .register-section {
+                width: 58%;
+                padding: 30px;
+            }
+
+
+            .register-brand-content h1 {
+                font-size: 38px;
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .register-page {
+                display: block;
+            }
+
+
+            .register-brand {
+                display: none;
+            }
+
+
+            .register-section {
+                width: 100%;
+                min-height: 100vh;
+
+                padding: 30px 22px;
+
+                box-sizing: border-box;
+            }
+
+
+            .register-card {
+                max-width: 430px;
+            }
+
+
+            .register-mobile-logo {
+                display: flex;
+
+                align-items: center;
+                justify-content: center;
+
+                gap: 10px;
+
+                margin-bottom: 45px;
+
+                color: #172554;
+
+                font-size: 22px;
+                font-weight: 700;
+            }
+
+
+            .register-mobile-logo-box {
+                width: 42px;
+                height: 42px;
+
+                border-radius: 10px;
+
+                background: #4f46e5;
+
+                color: white;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                font-size: 22px;
+                font-weight: 800;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <main class="register-page">
+
+
+        <!-- =================================================
+             LEFT BRAND SECTION
+        ================================================= -->
+
+        <section class="register-brand">
+
+
+            <div class="register-logo">
+
+                <div class="register-logo-box">
+                    S
+                </div>
+
+                <span>
+                    StockFlow
+                </span>
+
+            </div>
+
+
+            <div class="register-brand-content">
+
+                <h1>
+                    Build a smarter
+                    <span>workspace.</span>
+                </h1>
+
+
+                <p>
+                    Create your staff account and start managing
+                    your inventory, sales, customers and suppliers
+                    from one centralized platform.
+                </p>
+
+
+                <div class="register-benefits">
+
+
+                    <div class="register-benefit">
+
+                        <div class="benefit-icon">
+                            ✓
+                        </div>
+
+                        <span>
+                            Secure staff authentication
+                        </span>
+
+                    </div>
+
+
+                    <div class="register-benefit">
+
+                        <div class="benefit-icon">
+                            ✓
+                        </div>
+
+                        <span>
+                            Role-based staff access
+                        </span>
+
+                    </div>
+
+
+                    <div class="register-benefit">
+
+                        <div class="benefit-icon">
+                            ✓
+                        </div>
+
+                        <span>
+                            Centralized business management
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <div class="register-brand-footer">
+
+                © 2026 StockFlow. All rights reserved.
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             REGISTER SECTION
+        ================================================= -->
+
+        <section class="register-section">
+
+
+            <div class="register-card">
+
+
+                <!-- MOBILE LOGO -->
+
+                <div class="register-mobile-logo">
+
+                    <div class="register-mobile-logo-box">
+                        S
+                    </div>
+
+                    <span>
+                        StockFlow
+                    </span>
+
+                </div>
+
+
+                <!-- HEADER -->
+
+                <div class="register-header">
+
+                    <h2>
+                        Create staff account
+                    </h2>
+
+                    <p>
+                        Add a new staff member to your StockFlow workspace.
+                    </p>
+
+                </div>
+
+
+                <!-- =================================================
+                     REGISTRATION FORM
+                ================================================= -->
+
+                <form id="registerForm">
+
+
+                    <!-- USERNAME -->
+
+                    <div class="register-form-group">
+
+                        <label for="username">
+                            Username
+                        </label>
+
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            placeholder="Enter username"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="register-form-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+
+                        <div class="register-password">
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Create a password"
+                                autocomplete="new-password"
+                                required
+                            >
+
+
+                            <button
+                                type="button"
+                                id="togglePassword"
+                            >
+                                Show
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CONFIRM PASSWORD -->
+
+                    <div class="register-form-group">
+
+                        <label for="confirmPassword">
+                            Confirm Password
+                        </label>
+
+
+                        <div class="register-password">
+
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                placeholder="Confirm your password"
+                                autocomplete="new-password"
+                                required
+                            >
+
+
+                            <button
+                                type="button"
+                                id="toggleConfirmPassword"
+                            >
+                                Show
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ROLE -->
+
+                    <div class="register-form-group">
+
+                        <label for="role">
+                            Staff Role
+                        </label>
+
+
+                        <select
+                            id="role"
+                            name="role"
+                            required
+                        >
+
+                            <option value="">
+                                Select staff role
+                            </option>
+
+                            <option value="Admin">
+                                Admin
+                            </option>
+
+                            <option value="Cashier">
+                                Cashier
+                            </option>
+
+                        </select>
+
+
+                        <div class="role-info">
+
+                            Admins can manage the system.
+                            Cashiers can handle billing operations.
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- TERMS -->
+
+                    <label class="terms">
+
+                        <input
+                            type="checkbox"
+                            id="terms"
+                            required
+                        >
+
+                        <span>
+                            I understand that this account will be
+                            used to access the StockFlow management
+                            system.
+                        </span>
+
+                    </label>
+
+
+                    <!-- MESSAGE -->
+
+                    <div
+                        id="registerMessage"
+                        class="register-message"
+                    ></div>
+
+
+                    <!-- CREATE ACCOUNT -->
+
+                    <button
+                        type="submit"
+                        id="createAccountButton"
+                        class="create-account-button"
+                    >
+                        Create Staff Account
+                    </button>
+
+
+                </form>
+
+
+                <!-- LOGIN LINK -->
+
+                <div class="login-link-area">
+
+                    Already have an account?
+
+                    <a href="login.html">
+                        Sign in
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =================================================
+         REGISTER JAVASCRIPT
+    ================================================= -->
+
+    <script>
+
+        // =================================================
+        // ELEMENTS
+        // =================================================
+
+        const registerForm =
+            document.getElementById("registerForm");
+
+        const usernameInput =
+            document.getElementById("username");
+
+        const passwordInput =
+            document.getElementById("password");
+
+        const confirmPasswordInput =
+            document.getElementById("confirmPassword");
+
+        const togglePassword =
+            document.getElementById("togglePassword");
+
+        const toggleConfirmPassword =
+            document.getElementById(
+                "toggleConfirmPassword"
+            );
+
+        const roleInput =
+            document.getElementById("role");
+
+        const termsInput =
+            document.getElementById("terms");
+
+        const registerMessage =
+            document.getElementById("registerMessage");
+
+        const createAccountButton =
+            document.getElementById(
+                "createAccountButton"
+            );
+
+
+        // =================================================
+        // SHOW / HIDE PASSWORD
+        // =================================================
+
+        togglePassword.addEventListener(
+            "click",
+            function () {
+
+                if (
+                    passwordInput.type === "password"
+                ) {
+
+                    passwordInput.type = "text";
+
+                    togglePassword.textContent =
+                        "Hide";
+
+                } else {
+
+                    passwordInput.type = "password";
+
+                    togglePassword.textContent =
+                        "Show";
+
+                }
+
+            }
+        );
+
+
+        // =================================================
+        // SHOW / HIDE CONFIRM PASSWORD
+        // =================================================
+
+        toggleConfirmPassword.addEventListener(
+            "click",
+            function () {
+
+                if (
+                    confirmPasswordInput.type ===
+                    "password"
+                ) {
+
+                    confirmPasswordInput.type =
+                        "text";
+
+                    toggleConfirmPassword.textContent =
+                        "Hide";
+
+                } else {
+
+                    confirmPasswordInput.type =
+                        "password";
+
+                    toggleConfirmPassword.textContent =
+                        "Show";
+
+                }
+
+            }
+        );
+
+
+        // =================================================
+        // FORM SUBMIT
+        // IMPORTANT: async is required because we use await
+        // =================================================
+
+        registerForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+
+                // =================================================
+                // GET FORM VALUES
+                // =================================================
+
+                const username =
+                    usernameInput.value.trim();
+
+                const password =
+                    passwordInput.value;
+
+                const confirmPassword =
+                    confirmPasswordInput.value;
+
+                const role =
+                    roleInput.value;
+
+
+                // =================================================
+                // VALIDATION
+                // =================================================
+
+                if (username === "") {
+
+                    showMessage(
+                        "Please enter a username.",
+                        "error"
+                    );
+
+                    usernameInput.focus();
+
+                    return;
+                }
+
+
+                if (username.length < 3) {
+
+                    showMessage(
+                        "Username must contain at least 3 characters.",
+                        "error"
+                    );
+
+                    usernameInput.focus();
+
+                    return;
+                }
+
+
+                if (password === "") {
+
+                    showMessage(
+                        "Please enter a password.",
+                        "error"
+                    );
+
+                    passwordInput.focus();
+
+                    return;
+                }
+
+
+                if (password.length < 4) {
+
+                    showMessage(
+                        "Password must contain at least 4 characters.",
+                        "error"
+                    );
+
+                    passwordInput.focus();
+
+                    return;
+                }
+
+
+                if (confirmPassword === "") {
+
+                    showMessage(
+                        "Please confirm your password.",
+                        "error"
+                    );
+
+                    confirmPasswordInput.focus();
+
+                    return;
+                }
+
+
+                if (password !== confirmPassword) {
+
+                    showMessage(
+                        "Passwords do not match.",
+                        "error"
+                    );
+
+                    confirmPasswordInput.focus();
+
+                    return;
+                }
+
+
+                if (role === "") {
+
+                    showMessage(
+                        "Please select a staff role.",
+                        "error"
+                    );
+
+                    roleInput.focus();
+
+                    return;
+                }
+
+
+                if (!termsInput.checked) {
+
+                    showMessage(
+                        "Please accept the confirmation before creating the account.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                // =================================================
+                // CONNECT TO FLASK BACKEND
+                // =================================================
+
+                createAccountButton.disabled = true;
+
+                createAccountButton.textContent =
+                    "Creating account...";
+
+                clearMessage();
+
+
+                try {
+
+                    const response = await fetch(
+                        "http://127.0.0.1:5000/api/register",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                username: username,
+                                password: password,
+                                role: role
+                            })
+                        }
+                    );
+
+
+                    // =================================================
+                    // GET BACKEND RESPONSE
+                    // =================================================
+
+                    const data =
+                        await response.json();
+
+
+                    console.log(
+                        "Registration response:",
+                        data
+                    );
+
+
+                    // =================================================
+                    // SUCCESS
+                    // =================================================
+
+                    if (
+                        response.ok &&
+                        data.success
+                    ) {
+
+                        showMessage(
+                            "Staff account created successfully!",
+                            "success"
+                        );
+
+
+                        registerForm.reset();
+
+
+                        // Go to login page
+                        // after 1.2 seconds
+
+                        setTimeout(
+                            function () {
+
+                                window.location.href =
+                                    "login.html";
+
+                            },
+                            1200
+                        );
+
+
+                    } else {
+
+                        // =================================================
+                        // BACKEND ERROR
+                        // =================================================
+
+                        showMessage(
+                            data.message ||
+                            "Registration failed.",
+                            "error"
+                        );
+
+                    }
+
+
+                } catch (error) {
+
+                    // =================================================
+                    // SERVER CONNECTION ERROR
+                    // =================================================
+
+                    console.error(
+                        "Registration Error:",
+                        error
+                    );
+
+
+                    showMessage(
+                        "Cannot connect to the StockFlow server. Make sure Flask is running.",
+                        "error"
+                    );
+
+
+                } finally {
+
+                    createAccountButton.disabled =
+                        false;
+
+                    createAccountButton.textContent =
+                        "Create Staff Account";
+
+                }
+
+            }
+        );
+
+
+        // =================================================
+        // SHOW MESSAGE
+        // =================================================
+
+        function showMessage(
+            message,
+            type
+        ) {
+
+            registerMessage.textContent =
+                message;
+
+
+            if (type === "error") {
+
+                registerMessage.style.color =
+                    "#dc2626";
+
+            } else {
+
+                registerMessage.style.color =
+                    "#16a34a";
+
+            }
+
+        }
+
+
+        // =================================================
+        // CLEAR MESSAGE
+        // =================================================
+
+        function clearMessage() {
+
+            registerMessage.textContent = "";
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

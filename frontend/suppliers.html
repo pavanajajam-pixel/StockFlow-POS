@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StockFlow - Suppliers</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Inter", sans-serif;
+            background: #f7f8fc;
+            color: #25233a;
+        }
+
+        /* ================================
+           SIDEBAR
+        ================================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+
+            background: #ffffff;
+            border-right: 1px solid #e9e8f0;
+
+            padding: 24px 16px;
+
+            display: flex;
+            flex-direction: column;
+
+            z-index: 1000;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding: 0 12px;
+            margin-bottom: 35px;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+
+            background: linear-gradient(
+                135deg,
+                #5e548e,
+                #8d79b9
+            );
+
+            color: white;
+
+            border-radius: 12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 21px;
+        }
+
+        .brand-name {
+            font-size: 21px;
+            font-weight: 800;
+            color: #302c4f;
+        }
+
+        .nav-title {
+            font-size: 11px;
+            font-weight: 700;
+
+            color: #aaa8b8;
+
+            padding: 0 14px;
+            margin-bottom: 10px;
+
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            padding: 12px 14px;
+
+            margin-bottom: 5px;
+
+            border-radius: 10px;
+
+            color: #686679;
+
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: 500;
+
+            transition: 0.2s;
+        }
+
+        .nav-link i {
+            font-size: 18px;
+        }
+
+        .nav-link:hover {
+            background: #f2eff9;
+            color: #5e548e;
+        }
+
+        .nav-link.active {
+            background: #eeeafa;
+            color: #5e548e;
+            font-weight: 700;
+        }
+
+        .sidebar-bottom {
+            margin-top: auto;
+        }
+
+        .logout {
+            color: #c44536;
+        }
+
+        .logout:hover {
+            background: #fff0ee;
+            color: #c44536;
+        }
+
+        /* ================================
+           MAIN CONTENT
+        ================================= */
+
+        .main {
+            margin-left: 250px;
+            min-height: 100vh;
+        }
+
+        /* ================================
+           TOPBAR
+        ================================= */
+
+        .topbar {
+            height: 72px;
+
+            background: #ffffff;
+
+            border-bottom: 1px solid #e9e8f0;
+
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+
+            padding: 0 35px;
+        }
+
+        .top-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .notification {
+            width: 40px;
+            height: 40px;
+
+            border-radius: 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #666477;
+
+            background: #f7f6fa;
+
+            margin-right: 12px;
+        }
+
+        .notification:hover {
+            background: #eeeafa;
+            color: #5e548e;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+
+            border-radius: 50%;
+
+            background: #e7def0;
+
+            color: #5e548e;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: 700;
+        }
+
+        .user-info {
+            line-height: 1.2;
+        }
+
+        .user-name {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .user-role {
+            font-size: 11px;
+            color: #9997a8;
+        }
+
+        /* ================================
+           CONTENT
+        ================================= */
+
+        .content {
+            padding: 32px 35px;
+        }
+
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 28px;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 800;
+
+            margin: 0;
+
+            color: #29263f;
+        }
+
+        .page-subtitle {
+            margin-top: 7px;
+
+            color: #8a8799;
+
+            font-size: 14px;
+        }
+
+        .btn-primary-custom {
+            border: none;
+
+            background: #5e548e;
+
+            color: white;
+
+            padding: 11px 18px;
+
+            border-radius: 9px;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            transition: 0.2s;
+        }
+
+        .btn-primary-custom:hover {
+            background: #4c4377;
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        /* ================================
+           STAT CARDS
+        ================================= */
+
+        .stat-card {
+            background: white;
+
+            border: 1px solid #eceaf2;
+
+            border-radius: 14px;
+
+            padding: 20px;
+
+            height: 100%;
+
+            box-shadow: 0 3px 12px rgba(50, 40, 90, 0.03);
+        }
+
+        .stat-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 15px;
+        }
+
+        .stat-icon {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 19px;
+        }
+
+        .purple-icon {
+            background: #eeeafa;
+            color: #5e548e;
+        }
+
+        .green-icon {
+            background: #e9f7ef;
+            color: #26935f;
+        }
+
+        .blue-icon {
+            background: #eaf2ff;
+            color: #4776c7;
+        }
+
+        .orange-icon {
+            background: #fff3e6;
+            color: #d9822b;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #8c899b;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 25px;
+            font-weight: 800;
+            color: #29263f;
+        }
+
+        /* ================================
+           SUPPLIER SECTION
+        ================================= */
+
+        .supplier-section {
+            background: white;
+
+            border: 1px solid #eceaf2;
+
+            border-radius: 14px;
+
+            margin-top: 28px;
+
+            overflow: hidden;
+
+            box-shadow: 0 3px 12px rgba(50, 40, 90, 0.03);
+        }
+
+        .section-header {
+            padding: 22px 24px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            border-bottom: 1px solid #eeeef3;
+        }
+
+        .section-title {
+            margin: 0;
+
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            font-size: 12px;
+            color: #9997a8;
+
+            margin-top: 4px;
+        }
+
+        /* ================================
+           SEARCH
+        ================================= */
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box i {
+            position: absolute;
+
+            left: 13px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #aaa8b8;
+        }
+
+        .search-box input {
+            width: 270px;
+
+            height: 40px;
+
+            padding-left: 38px;
+
+            border: 1px solid #e5e3eb;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+
+            outline: none;
+        }
+
+        .search-box input:focus {
+            border-color: #9f86c0;
+
+            box-shadow: 0 0 0 3px rgba(159, 134, 192, 0.12);
+        }
+
+        /* ================================
+           TABLE
+        ================================= */
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            margin: 0;
+        }
+
+        thead th {
+            background: #faf9fc;
+
+            color: #777487;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            padding: 15px 20px;
+
+            border-bottom: 1px solid #e9e8ef;
+
+            white-space: nowrap;
+        }
+
+        tbody td {
+            padding: 16px 20px;
+
+            font-size: 13px;
+
+            color: #555264;
+
+            border-bottom: 1px solid #f0eff4;
+
+            vertical-align: middle;
+        }
+
+        tbody tr:hover {
+            background: #fcfbfe;
+        }
+
+        .supplier-name {
+            font-weight: 700;
+            color: #353147;
+        }
+
+        .email {
+            color: #777487;
+        }
+
+        .stock-badge {
+            display: inline-block;
+
+            padding: 5px 9px;
+
+            border-radius: 6px;
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            background: #fff3e6;
+            color: #c87522;
+        }
+
+        .action-btn {
+            width: 32px;
+            height: 32px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            margin-right: 5px;
+
+            transition: 0.2s;
+        }
+
+        .edit-btn {
+            background: #eeeafa;
+            color: #5e548e;
+        }
+
+        .edit-btn:hover {
+            background: #ddd7f0;
+        }
+
+        .delete-btn {
+            background: #fff0ee;
+            color: #c44536;
+        }
+
+        .delete-btn:hover {
+            background: #ffe0dc;
+        }
+
+        /* ================================
+           MODAL
+        ================================= */
+
+        .modal-content {
+            border: none;
+
+            border-radius: 15px;
+
+            box-shadow: 0 20px 60px rgba(30, 25, 55, 0.18);
+        }
+
+        .modal-header {
+            padding: 22px 24px;
+
+            border-bottom: 1px solid #eeeef3;
+        }
+
+        .modal-title {
+            font-size: 19px;
+            font-weight: 700;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .form-label {
+            font-size: 13px;
+
+            font-weight: 600;
+
+            color: #555264;
+        }
+
+        .form-control {
+            height: 43px;
+
+            border: 1px solid #e3e1e9;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+        }
+
+        .form-control:focus {
+            border-color: #9f86c0;
+
+            box-shadow: 0 0 0 3px rgba(159, 134, 192, 0.12);
+        }
+
+        .modal-footer {
+            padding: 18px 24px;
+
+            border-top: 1px solid #eeeef3;
+        }
+
+        .btn-cancel {
+            border: 1px solid #dddbe5;
+
+            background: white;
+
+            color: #666477;
+
+            border-radius: 8px;
+
+            padding: 9px 18px;
+        }
+
+        .btn-save {
+            border: none;
+
+            background: #5e548e;
+
+            color: white;
+
+            border-radius: 8px;
+
+            padding: 9px 20px;
+        }
+
+        .btn-save:hover {
+            background: #4c4377;
+            color: white;
+        }
+
+        /* ================================
+           EMPTY STATE
+        ================================= */
+
+        .empty-state {
+            text-align: center;
+
+            padding: 55px 20px;
+
+            color: #9997a8;
+        }
+
+        .empty-state i {
+            font-size: 38px;
+
+            color: #c8c4d4;
+
+            margin-bottom: 12px;
+        }
+
+        /* ================================
+           RESPONSIVE
+        ================================= */
+
+        @media (max-width: 900px) {
+
+            .sidebar {
+                width: 70px;
+
+                padding: 20px 10px;
+            }
+
+            .brand-name,
+            .nav-title,
+            .nav-link span,
+            .sidebar-bottom span {
+                display: none;
+            }
+
+            .brand {
+                justify-content: center;
+                padding: 0;
+            }
+
+            .nav-link {
+                justify-content: center;
+            }
+
+            .main {
+                margin-left: 70px;
+            }
+
+            .content {
+                padding: 25px 20px;
+            }
+
+            .search-box input {
+                width: 200px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .topbar {
+                padding: 0 15px;
+            }
+
+            .content {
+                padding: 20px 15px;
+            }
+
+            .page-header {
+                align-items: flex-start;
+                gap: 15px;
+                flex-direction: column;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .search-box,
+            .search-box input {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            <i class="bi bi-box-seam"></i>
+        </div>
+
+        <div class="brand-name">
+            StockFlow
+        </div>
+
+    </div>
+
+    <div class="nav-title">
+        Main Menu
+    </div>
+
+    <a href="dashboard.html" class="nav-link">
+        <i class="bi bi-grid-1x2"></i>
+        <span>Dashboard</span>
+    </a>
+
+    <a href="products.html" class="nav-link">
+        <i class="bi bi-box-seam"></i>
+        <span>Products</span>
+    </a>
+
+    <a href="customers.html" class="nav-link">
+        <i class="bi bi-people"></i>
+        <span>Customers</span>
+    </a>
+
+    <a href="billing.html" class="nav-link">
+        <i class="bi bi-receipt"></i>
+        <span>Billing</span>
+    </a>
+
+    <a href="suppliers.html" class="nav-link active">
+        <i class="bi bi-truck"></i>
+        <span>Suppliers</span>
+    </a>
+
+    <div class="nav-title mt-4">
+        Account
+    </div>
+
+    <a href="staff.html" class="nav-link">
+        <i class="bi bi-person-badge"></i>
+        <span>Staff</span>
+    </a>
+
+    <a href="login.html" class="nav-link logout">
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Logout</span>
+    </a>
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <div class="top-user">
+
+            <div class="notification">
+                <i class="bi bi-bell"></i>
+            </div>
+
+            <div class="avatar">
+                A
+            </div>
+
+            <div class="user-info">
+
+                <div class="user-name">
+                    Admin
+                </div>
+
+                <div class="user-role">
+                    Administrator
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =================================================
+         CONTENT
+    ================================================= -->
+
+    <section class="content">
+
+        <!-- PAGE HEADER -->
+
+        <div class="page-header">
+
+            <div>
+
+                <h1 class="page-title">
+                    Suppliers
+                </h1>
+
+                <div class="page-subtitle">
+                    Manage suppliers and monitor your stock sources.
+                </div>
+
+            </div>
+
+            <button
+                class="btn-primary-custom"
+                data-bs-toggle="modal"
+                data-bs-target="#supplierModal"
+                onclick="prepareAddSupplier()"
+            >
+
+                <i class="bi bi-plus-lg"></i>
+
+                Add Supplier
+
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             STATISTICS
+        ================================================= -->
+
+        <div class="row g-3">
+
+            <!-- Total Suppliers -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon purple-icon">
+                            <i class="bi bi-truck"></i>
+                        </div>
+
+                    </div>
+
+                    <div class="stat-label">
+                        Total Suppliers
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="totalSuppliers"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Active Suppliers -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon green-icon">
+                            <i class="bi bi-check-circle"></i>
+                        </div>
+
+                    </div>
+
+                    <div class="stat-label">
+                        Active Suppliers
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="activeSuppliers"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Products Supplied -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon blue-icon">
+                            <i class="bi bi-box-seam"></i>
+                        </div>
+
+                    </div>
+
+                    <div class="stat-label">
+                        Products Supplied
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="productsSupplied"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Low Stock -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon orange-icon">
+                            <i class="bi bi-exclamation-triangle"></i>
+                        </div>
+
+                    </div>
+
+                    <div class="stat-label">
+                        Low Stock Alerts
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="lowStockAlerts"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             SUPPLIER TABLE
+        ================================================= -->
+
+        <div class="supplier-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2 class="section-title">
+                        Supplier List
+                    </h2>
+
+                    <div class="section-subtitle">
+                        View and manage registered suppliers.
+                    </div>
+
+                </div>
+
+
+                <div class="search-box">
+
+                    <i class="bi bi-search"></i>
+
+                    <input
+                        type="text"
+                        id="supplierSearch"
+                        placeholder="Search suppliers..."
+                        onkeyup="searchSuppliers()"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Supplier</th>
+
+                            <th>Email</th>
+
+                            <th>Product</th>
+
+                            <th>Minimum Stock</th>
+
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="supplierTableBody">
+
+                        <!-- Supplier rows will be loaded by suppliers.js -->
+
+                    </tbody>
+
+                </table>
+
+                <!-- Empty State -->
+
+                <div
+                    id="emptyState"
+                    class="empty-state"
+                >
+
+                    <i class="bi bi-truck"></i>
+
+                    <div class="fw-semibold">
+                        No suppliers found
+                    </div>
+
+                    <small>
+                        Add your first supplier to get started.
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =====================================================
+     ADD / EDIT SUPPLIER MODAL
+===================================================== -->
+
+<div
+    class="modal fade"
+    id="supplierModal"
+    tabindex="-1"
+    aria-hidden="true"
+>
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <h5
+                        class="modal-title"
+                        id="supplierModalTitle"
+                    >
+                        Add Supplier
+                    </h5>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                ></button>
+
+            </div>
+
+
+            <form id="supplierForm">
+
+                <div class="modal-body">
+
+                    <!-- Supplier Name -->
+
+                    <div class="mb-3">
+
+                        <label
+                            class="form-label"
+                            for="supplierName"
+                        >
+                            Supplier Name
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="supplierName"
+                            placeholder="Enter supplier name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Email -->
+
+                    <div class="mb-3">
+
+                        <label
+                            class="form-label"
+                            for="supplierEmail"
+                        >
+                            Supplier Email
+                        </label>
+
+                        <input
+                            type="email"
+                            class="form-control"
+                            id="supplierEmail"
+                            placeholder="supplier@example.com"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Product -->
+
+                    <div class="mb-3">
+
+                        <label
+                            class="form-label"
+                            for="supplierProduct"
+                        >
+                            Product Name
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="supplierProduct"
+                            placeholder="Enter product name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Minimum Stock -->
+
+                    <div class="mb-0">
+
+                        <label
+                            class="form-label"
+                            for="minimumStock"
+                        >
+                            Minimum Stock Level
+                        </label>
+
+                        <input
+                            type="number"
+                            class="form-control"
+                            id="minimumStock"
+                            placeholder="Enter minimum stock"
+                            min="0"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn-cancel"
+                        data-bs-dismiss="modal"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn-save"
+                    >
+                        Save Supplier
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Bootstrap JS -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+></script>
+
+
+<!-- StockFlow Supplier JS -->
+
+<script src="js/suppliers.js"></script>
+
+</body>
+</html>
