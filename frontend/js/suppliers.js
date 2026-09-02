@@ -2,7 +2,7 @@
 // STOCKFLOW - SUPPLIERS.JS
 // ==========================================================
 
-const API_URL = "http://localhost:5000/api/suppliers";
+const API_URL = "https://stockflow-pos-yorq.onrender.com/api/suppliers";
 
 // ==========================================================
 // DOM ELEMENTS
