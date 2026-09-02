@@ -1,4 +1,4 @@
-const API_URL = "https://stockflow-pos-yorq.onrender.com/api/billing";
+const API = "https://stockflow-pos-yorq.onrender.com/api";
 let products = [];
 let customers = [];
 let cart = [];
