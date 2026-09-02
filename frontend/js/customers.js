@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:5000/api/customers";
+const API_URL = "https://stockflow-pos-yorq.onrender.com/api/customers";
 let customers = [];
 let editingId = null;
 
